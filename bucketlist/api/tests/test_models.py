@@ -15,7 +15,7 @@ class BucketListModelTestCase(TestCase):
     """Tests for the BucketList model"""
     def setUp(self):
         user = User.objects.create(username='rikky', password='marryam')
-        bucketlist = BucketList.objects.create(name='B1', owner=user)
+        BucketList.objects.create(name='B1', owner=user)
 
     def test_bucketlist_model(self):
         user = User.objects.get(username='rikky')
@@ -31,8 +31,8 @@ class BucketListItemModelTestCase(TestCase):
     def setUp(self):
         user = User.objects.create(username='rikky', password='marryam')
         bucketlist = BucketList.objects.create(name='B1', owner=user)
-        item = BucketListItem.objects.create(name='Visit Vietnam',
-                                             bucketlist=bucketlist)
+        BucketListItem.objects.create(name='Visit Vietnam',
+                                      bucketlist=bucketlist)
 
     def test_bucketlist_item_model(self):
         bucketlist = BucketList.objects.get(id=1)
