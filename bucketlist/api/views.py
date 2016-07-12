@@ -9,6 +9,7 @@ from rest_framework.reverse import reverse
 from api.models import BucketList, BucketListItem
 from api.serializers import BucketListSerializer, BucketListItemSerializer, \
     UserSerializer
+from api.custom_permissions import IsOwner, IsParentId
 
 
 @api_view(['GET'])
@@ -75,21 +76,20 @@ class BucketListDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = BucketList.objects.all()
     serializer_class = BucketListSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, IsOwner)
 
 
 class BucketListItemAll(generics.ListCreateAPIView):
     """
     Create a new bucketlist item.
     """
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, IsParentId)
     queryset = BucketListItem.objects.all()
     serializer_class = BucketListItemSerializer
 
     def perform_create(self, serializer):
         """Include the bucketlist id within BucketListItem object"""
         bucketlist_id = self.kwargs['bucketlist']
-        # import pdb; pdb.set_trace()
         try:
             bucketlist = BucketList.objects.get(pk=bucketlist_id)
         except BucketList.DoesNotExist:
@@ -99,7 +99,9 @@ class BucketListItemAll(generics.ListCreateAPIView):
     def get_queryset(self):
         """Limit items returned to those of a particular bucketlist"""
         bucketlist_id = self.kwargs['bucketlist']
-        return BucketListItem.objects.filter(bucketlist=bucketlist_id)
+        return BucketListItem.objects.filter(
+            bucketlist=bucketlist_id,
+            bucketlist__owner=self.request.user)
 
 
 class BucketListItemDetail(MultipleFieldLookupMixin,
@@ -110,4 +112,4 @@ class BucketListItemDetail(MultipleFieldLookupMixin,
     queryset = BucketListItem.objects.all()
     serializer_class = BucketListItemSerializer
     lookup_fields = ('bucketlist', 'pk')
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, IsParentId)

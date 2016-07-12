@@ -1,0 +1,72 @@
+[
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$vSPA5ES6geDm$D4hgvMoQ19NbGyVAjz/YZYNEfcgN6lDnItpqWt0qQew=",
+        "last_login": "2016-07-11T23:35:45.722Z",
+        "is_superuser": true,
+        "username": "Erika",
+        "first_name": "",
+        "last_name": "",
+        "email": "chukwuerika.dike@andela.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2016-07-11T23:35:27.543Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$zXdCMkYs5UYH$BwbLYwryWI/haJjUGlKAHnWqdaoNaLnvGUZRWQW3qB4=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Malik",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-07-12T09:28:52.802Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$OkyrdPT3RGxl$ZijAoS8zt/HZyBW/jc0WYoC5nghfw+bI9kMQaGe4jRg=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "itachi",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-07-12T09:32:16.409Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "49e4e5f3696db18ae7e7edf0d880de800ab723d6",
+    "fields": {
+        "user": 1,
+        "created": "2016-07-12T09:11:56.272Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "ddf00e2d51aa8fe6b09d128e9600dff1b06c9902",
+    "fields": {
+        "user": 2,
+        "created": "2016-07-12T09:34:01.776Z"
+    }
+}
+]
