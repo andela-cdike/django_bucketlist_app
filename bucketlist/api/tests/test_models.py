@@ -18,10 +18,9 @@ class BucketListModelTestCase(TestCase):
         BucketList.objects.create(name='B1', owner=user)
 
     def test_bucketlist_model(self):
-        user = User.objects.get(username='rikky')
-        bucketlist = BucketList.objects.get(id=1)
+        user = User.objects.all()[0]
+        bucketlist = BucketList.objects.all()[0]
         self.assertEqual(str(bucketlist), 'B1')
-        self.assertEqual(bucketlist.id, 1)
         self.assertEqual(bucketlist.owner, user)
         self.assertEqual(BucketList.objects.count(), 1)
 
@@ -35,9 +34,8 @@ class BucketListItemModelTestCase(TestCase):
                                       bucketlist=bucketlist)
 
     def test_bucketlist_item_model(self):
-        bucketlist = BucketList.objects.get(id=1)
-        item = BucketListItem.objects.get(id=1)
+        bucketlist = BucketList.objects.all()[0]
+        item = BucketListItem.objects.all()[0]
         self.assertEqual(str(item), 'Visit Vietnam')
-        self.assertEqual(item.id, 1)
         self.assertEqual(item.bucketlist, bucketlist)
         self.assertEqual(BucketListItem.objects.count(), 1)
