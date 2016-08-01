@@ -24,6 +24,8 @@ urlpatterns = [
         generic.TemplateView.as_view(template_name='view2.html')),
     url(r'^kickthebucket/view1',
         generic.TemplateView.as_view(template_name='view1.html')),
+    url(r'^dothebucket/bucketlists',
+        generic.TemplateView.as_view(template_name='bucketlists.html')),
     url(r'^api/v1/login', include('rest_framework.urls',
                                   namespace='rest_framework')),
 ]

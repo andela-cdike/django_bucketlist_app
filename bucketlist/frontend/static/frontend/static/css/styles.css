@@ -1,0 +1,98 @@
+html, body {
+  color: #45818E;
+  background-image: url("../img/notebook-paper-background.jpg");
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.navbar {
+  min-height: 60px;
+}
+
+.navbar-inverse {
+  background-color: #e6cf9b;
+  border-color: #e6cf9b;
+}
+
+.modal-content {
+  background: #f9fad2;
+}
+
+.btn-default {
+  background: #e6cf9b;
+}
+
+.btn-del {
+  margin-right: 5px;
+}
+
+.btn-primary {
+  background-color: #45818E;
+  border-color: #45818E;
+}
+
+.sub-heading {
+  margin-top: 81px;
+}
+
+.col-sm-offset-10 {
+  margin-left: 79.333333%;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .col-sm-offset-10 {
+    margin-right: 90.333333%;
+  }
+}
+
+.search {
+  top: 86px;
+  right: -127px;
+}
+
+@media (max-width: 768px) {
+  .search {
+    top: 6px;
+    right: -4px;
+  }
+}
+
+.search-input-box {
+  background-color: #f9fad2;
+  color: #45818E;
+}
+
+.card {
+  position: relative;
+  margin: 10px;
+  color: #45818E;
+  background-color: #f9fad2;
+}
+
+.card:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-width: 0 20px 20px 0;
+  border-style: solid;
+  border-color: #45818E #e0e1bd;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+}
+
+.card.rounded {
+  -moz-border-radius: 5px 0 5px 5px;
+  border-radius: 5px 0 5px 5px;
+}
+
+.card.rounded:before {
+  border-width: 8px;
+  border-color: #e0e1bd #e0e1bd transparent transparent;
+  -moz-border-radius: 0 0 0 5px;
+  border-radius: 0 0 0 5px;
+}

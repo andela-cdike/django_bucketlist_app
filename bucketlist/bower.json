@@ -1,0 +1,21 @@
+{
+  "name": "bucketlist-app",
+  "description": "app requirements",
+  "main": "",
+  "authors": [
+    "Chukwuerika Dike"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/andela-cdike/django_bucketlist_app",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "~4.6.3",
+  }
+}
