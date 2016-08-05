@@ -1,7 +1,7 @@
 import { connect } from "react-redux"
 import moment from "moment";
 import React from "react"
-import { Jumbotron, PageHeader, Well } from "react-bootstrap";
+import { Pagination, Well } from "react-bootstrap";
 import { Link } from "react-router";
 
 import { fetchBucketlists } from "../actions/bucketlistsActions";
@@ -17,21 +17,47 @@ var Packery = require('react-packery-component')(React);
 @connect((store) => {
   return {
     bucketlists: store.bucketlists.bucketlists,
+    count: store.bucketlists.count,
+    next: store.bucketlists.next,
+    previous: store.bucketlists.previous,
     items: store.items.items,
   };
 })
 
 export default class Bucketlist extends React.Component {
-  componentWillMount() {
-    this.props.dispatch(fetchBucketlists())
+  constructor(props) {
+    super(props);
+    this.state = {
+      activePage: 1,
+    };
   }
 
-  handleClick() {
-    this.props.dispatch(increaseCounter())
+  componentWillMount() {
+    this.props.dispatch(fetchBucketlists());
+  }
+
+  gotoPreviousPage() {
+    this.props.dispatch(fetchBucketlists(this.props.previous));
+  }
+
+  handleChangePage(e) {
+    console.log(e)
+    if (e > this.state.activePage) {
+      this.props.dispatch(fetchBucketlists(e));
+    }
+    else if (e < this.state.activePage) {
+      this.props.dispatch(fetchBucketlists(e));
+    }
+    this.setState({ activePage: e });
   }
   
   render() {
-    const { bucketlists } = this.props;
+    const { bucketlists, count } = this.props;
+    const limit = 5;
+    const numOfPages = Math.ceil(count / limit);
+
+    console.log(bucketlists)
+
     const mappedBucketlists = bucketlists.map((bucketlist, i) => 
       <Well key={i} bsClass="well card rounded col-sm-5 col-xs-12 col-xs-offset-2">
         <div class="row">
@@ -68,12 +94,22 @@ export default class Bucketlist extends React.Component {
           </div>
         </div>
         <div class="row">
-          <AddButton dispatch={this.props.dispatch} type="bucketlist"></AddButton>
+          <AddButton dispatch={this.props.dispatch} type="Bucketlist"></AddButton>
         </div>
         <div class="row">
           <Packery>
             {mappedBucketlists}
           </Packery>
+        </div>
+        <div class="row pagination-block">
+          <Pagination
+            prev
+            next
+            boundaryLinks
+            items={numOfPages}
+            maxButtons={5}
+            activePage={this.state.activePage}
+            onSelect={this.handleChangePage.bind(this)} />
         </div>
       </div>
     );

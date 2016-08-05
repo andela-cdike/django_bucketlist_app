@@ -1,5 +1,8 @@
 export default function reducer(state={
   bucketlists: [],
+  next: null,
+  previous: null,
+  count: null,
   fetching: false,
   fetched: false,
   saving: false,
@@ -19,7 +22,10 @@ export default function reducer(state={
         ...state,
         fetching: false,
         fetched: true,
-        bucketlists: action.payload,
+        next: action.payload.next,
+        previous: action.payload.previous,
+        count: action.payload.count,
+        bucketlists: action.payload.results,
       }
     }
     case "SEARCH_BUCKETLISTS_REJECTED": {
@@ -30,7 +36,7 @@ export default function reducer(state={
         ...state,
         fetching: false,
         fetched: true,
-        bucketlists: action.payload,
+        bucketlists: action.payload.results,
       }
     }
     case "ADD_BUCKETLIST": {

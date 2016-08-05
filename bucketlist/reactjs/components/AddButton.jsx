@@ -27,15 +27,15 @@ export default class AddButton extends React.Component {
                                   this.state.name,
                                   this.state.done));
     }
-    this.setState({ name: "", done: false});
+    this.setState({ name: "", done: false });
   }
 
   close() {
-    this.setState({ showModal: false});
+    this.setState({ showModal: false });
   }
 
   open() {
-    this.setState({ showModal: true});
+    this.setState({ showModal: true });
   }
 
   handleChange(e) {

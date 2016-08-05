@@ -2,14 +2,15 @@ import axios from "axios";
 
 const hostname = window.location.origin;
 const token  = "94ec049e5a50e855028dd33ce08ec52ea475a5b4"
-const baseUrl = "/api/v1/bucketlists/"
+const baseUrl = hostname + "/api/v1/bucketlists/"
 const config = {
   headers: {'Authorization': 'Token ' + token}
 };
 
-export function fetchBucketlists() {
+export function fetchBucketlists(page=1) {
+  const url = baseUrl + "?page=" + page;
   return function(dispatch) {
-    axios.get(hostname + baseUrl, config)
+    axios.get(url, config)
       .then((response) => {
         dispatch({type: "FETCH_BUCKETLISTS_FULFILLED", payload: response.data})
       })
@@ -20,7 +21,7 @@ export function fetchBucketlists() {
 }
 
 export function searchBucketlists(query) {
-  const url = hostname + baseUrl + "?q=" + query;
+  const url = baseUrl + "?q=" + query;
   return function(dispatch) {
     axios.get(url, config)
       .then((response) => {
@@ -34,7 +35,7 @@ export function searchBucketlists(query) {
 
 export function addBucketlist(name) {
   return function(dispatch) {
-    axios.post(hostname + baseUrl, { name: name }, config)
+    axios.post(baseUrl, { name: name }, config)
       .then((response) => {
         dispatch({type: "ADD_BUCKETLIST_FULFILLED", payload: response.data})
       })
@@ -48,7 +49,7 @@ export function addBucketlist(name) {
 export function editBucketlist(id, name) {
   console.log("values: ", id, name)
   return function(dispatch) {
-    axios.put(hostname + baseUrl + id, {name: name}, config)
+    axios.put(baseUrl + id, {name: name}, config)
       .then((response) => {
         dispatch({type: "EDIT_BUCKETLIST_FULFILLED", payload: response.data})
       })
@@ -61,7 +62,7 @@ export function editBucketlist(id, name) {
 // export function delete
 export function deleteBucketlist(id) {
   return function(dispatch) {
-    axios.delete(hostname + baseUrl + id, config)
+    axios.delete(baseUrl + id, config)
       .then((response) => {
         dispatch({type: "DELETE_BUCKETLIST_FULFILLED", payload: id})
       })

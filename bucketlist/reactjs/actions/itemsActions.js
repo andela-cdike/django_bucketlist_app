@@ -2,14 +2,15 @@ import axios from "axios";
 
 const hostname = window.location.origin;
 const token  = "94ec049e5a50e855028dd33ce08ec52ea475a5b4"
-const baseUrl = "/api/v1/bucketlists/"
+const baseUrl = hostname + "/api/v1/bucketlists/"
 const config = {
   headers: {'Authorization': 'Token ' + token}
 };
 
-export function fetchItems(id) {
+export function fetchItems(parent_id, page=1) {
+  const url = baseUrl + parent_id + "?page=" + page;
   return function(dispatch) {
-    axios.get(hostname + baseUrl + id, config)
+    axios.get(url, config)
       .then((response) => {
         dispatch({type: "FETCH_ITEMS_FULFILLED", payload: response.data})
       })

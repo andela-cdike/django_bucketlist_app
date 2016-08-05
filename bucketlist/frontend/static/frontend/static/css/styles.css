@@ -65,6 +65,12 @@ a:hover {
   color: #45818E;
 }
 
+.empty-notice h3{
+  position: relative;
+  left: 25%;
+  width: 600px;
+}
+
 .card {
   position: relative;
   margin: 10px;
@@ -95,4 +101,32 @@ a:hover {
   border-color: #e0e1bd #e0e1bd transparent transparent;
   -moz-border-radius: 0 0 0 5px;
   border-radius: 0 0 0 5px;
+}
+
+.pagination-block {
+  width: 150px;
+  margin: 0 auto;
+}
+
+.pagination > li > a {
+  background: ;
+  color: ;
+}
+
+.pagination > .active > a {
+  background-color:  #45818E;
+}
+
+.pagination > .active > a:hover {
+  background-color:  #286090;
+}
+
+footer {
+  width: 100%;
+  position: absolute;
+  bottom: -550px;
+}
+
+footer p {
+  text-align: center;
 }

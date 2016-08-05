@@ -1,6 +1,7 @@
 export default function reducer(state={
   bucketlist: {items: []},
   items: [],
+  count: null,
   fetching: false,
   fetched: false,
   saving: false,
@@ -21,7 +22,9 @@ export default function reducer(state={
         ...state,
         fetching: false,
         fetched: true,
-        bucketlist: action.payload
+        bucketlist: action.payload,
+        count: action.payload.items.count,
+        items: action.payload.items.items,
       }
     }
     case "ADD_ITEM": {

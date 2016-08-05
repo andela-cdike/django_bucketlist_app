@@ -6,10 +6,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
-from api.models import BucketList, BucketListItem
-from api.serializers import BucketListSerializer, BucketListItemSerializer, \
-    UserSerializer
 from api.custom_permissions import IsOwner, IsParentId
+from api.custom_pagination import StandardSetPagination
+from api.models import BucketList, BucketListItem
+from api.serializers import BucketListAllSerializer, \
+    BucketListDetailSerializer, BucketListItemSerializer, UserSerializer
 
 
 @api_view(['GET'])
@@ -51,7 +52,8 @@ class BucketListAll(generics.ListCreateAPIView):
     List all code snippets, or create a new bucketlist.
     """
     queryset = BucketList.objects.all()
-    serializer_class = BucketListSerializer
+    serializer_class = BucketListAllSerializer
+    pagination_class = StandardSetPagination
     permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
@@ -75,7 +77,7 @@ class BucketListDetail(generics.RetrieveUpdateDestroyAPIView):
     Retrieve, update or delete a bucketlist instance.
     """
     queryset = BucketList.objects.all()
-    serializer_class = BucketListSerializer
+    serializer_class = BucketListDetailSerializer
     permission_classes = (permissions.IsAuthenticated, IsOwner)
 
 

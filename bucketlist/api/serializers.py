@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
-from rest_framework import serializers
+from rest_framework import pagination, serializers
 
+from api.custom_pagination import StandardSetPagination
 from api.models import Base, BucketList, BucketListItem
 
 
@@ -40,11 +41,46 @@ class BucketListItemSerializer(BaseSerializer):
                   'date_modified',)
 
 
-class BucketListSerializer(BaseSerializer):
+class BucketListAllSerializer(BaseSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
-    items = BucketListItemSerializer(many=True, read_only=True)
+    # items = BucketListItemSerializer(many=True, read_only=True)
+    items = serializers.SerializerMethodField('get_two_items')
 
     class Meta:
         model = BucketList
         fields = ('id', 'name', 'date_created', 'date_modified', 'items',
                   'owner')
+
+    def get_two_items(self, obj):
+        """Limit the number of items returned to two to serve as preview"""
+        items = BucketListItem.objects.filter(bucketlist=obj). \
+            order_by('date_created')
+        serializer = BucketListItemSerializer(
+            items[:2], many=True, context={'request': self.context['request']})
+        return {
+            'count': items.count(),
+            'items': serializer.data
+        }
+
+
+class BucketListDetailSerializer(BaseSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+    # items = BucketListItemSerializer(many=True, read_only=True)
+    items = serializers.SerializerMethodField('paginated_items')
+
+    class Meta:
+        model = BucketList
+        fields = ('id', 'name', 'date_created', 'date_modified', 'items',
+                  'owner')
+
+    def paginated_items(self, obj):
+        items = BucketListItem.objects.filter(bucketlist=obj)
+        paginator = StandardSetPagination()
+        page = paginator.paginate_queryset(items, self.context['request'])
+        serializer = BucketListItemSerializer(
+            page, many=True, context={'request': self.context['request']}
+        )
+        return {
+            'count': items.count(),
+            'items': serializer.data
+        }
