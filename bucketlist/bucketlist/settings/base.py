@@ -138,6 +138,10 @@ BOWER_INSTALLED_APPS = (
     'react-bootstrap#0.29.5',
 )
 
+# redirect user to his lists of bucketlist after login
+LOGIN_REDIRECT_URL = '/bucketlists'
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/login/'
 
 # Add setting for Django REST Framework
 REST_FRAMEWORK = {

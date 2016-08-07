@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const hostname = window.location.origin;
-const token  = "94ec049e5a50e855028dd33ce08ec52ea475a5b4"
+const token  = document.cookie.slice(55)
 const baseUrl = hostname + "/api/v1/bucketlists/"
 const config = {
   headers: {'Authorization': 'Token ' + token}

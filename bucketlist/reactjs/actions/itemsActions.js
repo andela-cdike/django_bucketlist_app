@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const hostname = window.location.origin;
-const token  = "94ec049e5a50e855028dd33ce08ec52ea475a5b4"
+const token  = document.cookie.slice(55)
 const baseUrl = hostname + "/api/v1/bucketlists/"
 const config = {
   headers: {'Authorization': 'Token ' + token}
@@ -22,8 +22,9 @@ export function fetchItems(parent_id, page=1) {
 
 export function addItem(parent_id, name, done) {
   const url = baseUrl + parent_id + "/items/"
+  console.log(url);
   return function(dispatch) {
-    axios.post(hostname + url, { name: name, done: done }, config)
+    axios.post(url, { name: name, done: done }, config)
       .then((response) => {
         dispatch({type: "ADD_ITEM_FULFILLED", payload: response.data})
       })
@@ -37,7 +38,7 @@ export function addItem(parent_id, name, done) {
 export function editItem(parent_id, id, name, done) {
   const url = baseUrl + parent_id + "/items/" + id; 
   return function(dispatch) {
-    axios.put(hostname + url, {name: name, done: done}, config)
+    axios.put(url, {name: name, done: done}, config)
       .then((response) => {
         dispatch({type: "EDIT_ITEM_FULFILLED", payload: response.data})
       })
@@ -51,7 +52,7 @@ export function editItem(parent_id, id, name, done) {
 export function deleteItem(parent_id, id) {
   const url = baseUrl + parent_id + "/items/" + id;
   return function(dispatch) {
-    axios.delete(hostname + url, config)
+    axios.delete(url, config)
       .then((response) => {
         dispatch({type: "DELETE_ITEM_FULFILLED", payload: id})
       })

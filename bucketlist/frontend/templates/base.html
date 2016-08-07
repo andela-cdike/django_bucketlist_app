@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>React</title>
+    <title>Do the bucket</title>
     <!-- Bootstrap Core CSS -->
     {% load static %}
     <link rel="stylesheet" href="{% static 'frontend/static/bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
@@ -26,10 +26,18 @@
     <script type="text/javascript" src="{% static 'frontend/static/bower_components/jquery/dist/jquery.js' %}"></script>
     <script type="text/javascript" src="{% static 'frontend/static/bower_components/react/react.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'frontend/static/bower_components/react-bootstrap/react-bootstrap.min.js' %}"></script>
+
+    {% block extended_css %}
+        {# override this block to add app/feature-specific css in extending templates #}
+    {% endblock extended_css %}
+
     
   </head>
 
   <body>
     {% block main %}{% endblock %}
+    {% block extended_js %}
+     <!-- override this block to add app/feature-specific js libraries and scripts in extending templates -->
+    {% endblock extended_js %}
   </body>
 </html>
