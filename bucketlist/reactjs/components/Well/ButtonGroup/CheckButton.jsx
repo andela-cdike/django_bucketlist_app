@@ -13,14 +13,13 @@ const styles = {
     display: "inline",
   },
 }
+
 @Radium
 export default class CheckButton extends React.Component {
   checkItem() {
-    const { item } = this.props;
-    this.props.dispatch(editItem(item.bucketlist,
-                                item.id,
-                                item.name,
-                                !item.done
+    const { dispatch, item, token } = this.props;
+    dispatch(editItem(
+      token, item.bucketlist, item.id, item.name, !item.done
     ));
   }
 

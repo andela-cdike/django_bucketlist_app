@@ -23,11 +23,12 @@ export default class DeleteButton extends React.Component {
   }
 
   deleteItem() {
-    const { item } = this.props;
-    if (this.props.type === "Bucketlist") {
-      this.props.dispatch(deleteBucketlist(item.id));
+    // delete items from both bucketlist and bucketlist items
+    const { dispatch, item, token, type } = this.props;
+    if (type === "Bucketlist") {
+      dispatch(deleteBucketlist(token, item.id));
     } else if (this.props.type === "Item") {
-      this.props.dispatch(deleteItem(item.bucketlist, item.id));
+      dispatch(deleteItem(token, item.bucketlist, item.id));
     }
     this.close();
   }
@@ -68,7 +69,7 @@ export default class DeleteButton extends React.Component {
           
           <Modal.Footer>
             <Button onClick={this.close.bind(this)}>Cancel</Button>
-            <Button onClick={this.deleteItem.bind(this)}>
+            <Button onClick={this.deleteItem.bind(this)} autoFocus>
               Delete
             </Button>
           </Modal.Footer>

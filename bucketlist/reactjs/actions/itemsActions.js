@@ -1,14 +1,18 @@
 import axios from "axios";
 
 const hostname = window.location.origin;
-const token  = document.cookie.slice(55)
 const baseUrl = hostname + "/api/v1/bucketlists/"
-const config = {
-  headers: {'Authorization': 'Token ' + token}
-};
 
-export function fetchItems(parent_id, page=1) {
+
+function constructConfig(token) {
+  return {
+    headers: {'Authorization': 'JWT ' + token}
+  };
+}
+
+export function fetchItems(token, parent_id, page=1) {
   const url = baseUrl + parent_id + "?page=" + page;
+  const config = constructConfig(token)
   return function(dispatch) {
     axios.get(url, config)
       .then((response) => {
@@ -20,9 +24,9 @@ export function fetchItems(parent_id, page=1) {
   }
 }
 
-export function addItem(parent_id, name, done) {
+export function addItem(token, parent_id, name, done) {
   const url = baseUrl + parent_id + "/items/"
-  console.log(url);
+  const config = constructConfig(token)
   return function(dispatch) {
     axios.post(url, { name: name, done: done }, config)
       .then((response) => {
@@ -35,8 +39,9 @@ export function addItem(parent_id, name, done) {
 }
 
 // export function edit
-export function editItem(parent_id, id, name, done) {
+export function editItem(token, parent_id, id, name, done) {
   const url = baseUrl + parent_id + "/items/" + id; 
+  const config = constructConfig(token)
   return function(dispatch) {
     axios.put(url, {name: name, done: done}, config)
       .then((response) => {
@@ -49,8 +54,9 @@ export function editItem(parent_id, id, name, done) {
 }
 
 // export function delete
-export function deleteItem(parent_id, id) {
+export function deleteItem(token, parent_id, id) {
   const url = baseUrl + parent_id + "/items/" + id;
+  const config = constructConfig(token)
   return function(dispatch) {
     axios.delete(url, config)
       .then((response) => {

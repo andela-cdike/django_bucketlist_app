@@ -1,8 +1,7 @@
-import json
 import requests
 
 from django.contrib import messages
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
@@ -57,7 +56,7 @@ class UserLoginView(View):
         Process form data on POST requests
         """
         auth_form = AuthenticationForm(data=request.POST)
-        import pdb; pdb.set_trace()
+
         if auth_form.is_valid():
             login(request, auth_form.get_user())
 
@@ -71,6 +70,8 @@ class UserLoginView(View):
 
             response = HttpResponseRedirect(reverse('bucketlists'))
             response.set_cookie('user_token', user_token)
+            response.set_cookie('user_id', request.user.id)
+            request.session.set_expiry(600)
             return response
         else:
             for key in auth_form.errors:
@@ -83,6 +84,15 @@ class UserLoginView(View):
             return render(
                 request, 'authenticate.html', {'form': RegisterForm}
             )
+
+
+class UserLogoutView(View):
+    """
+    This class logs out an authenticated user from session.
+    """
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return HttpResponseRedirect(reverse('login'))
 
 
 class UserRegistrationView(View):
@@ -108,14 +118,14 @@ class UserRegistrationView(View):
             'register_form': register_form,
             'register_class': 'active'
         })
-        return render(request, 'register.html', args)
+        return render(request, 'authenticate.html', args)
 
     def post(self, request, *args, **kwargs):
         """
         Process form data on Post requests
         """
         user_form = RegisterForm(request.POST)
-        import pdb; pdb.set_trace()
+
         # check that the username isn't already taken
         username = request.POST.get('username')
         have_same_username = User.objects.filter(username__exact=username)
@@ -127,10 +137,17 @@ class UserRegistrationView(View):
             msg = ("Username is already taken. Please signup with another"
                    " username.")
             messages.add_message(request, messages.INFO, msg)
-            return render(request, 'register.html', args)
+            return render(request, 'authenticate.html', args)
 
         if user_form.is_valid():
             user_form.save()
+            new_user = User.objects.get(username__exact=username)
+            new_user.is_active = True
+            new_user.save()
+
+            msg = ("User was successfully created. Please login to start"
+                   " using the app.")
+            messages.add_message(request, messages.SUCCESS, msg)
             return HttpResponseRedirect(reverse('login'))
         else:
             for key in user_form.errors:
@@ -141,7 +158,7 @@ class UserRegistrationView(View):
             args.update(csrf(request))
             args.update({'form': RegisterForm})
             return render(
-                request, 'register.html', {'form': RegisterForm}
+                request, 'authenticate.html', {'form': RegisterForm}
             )
 
 

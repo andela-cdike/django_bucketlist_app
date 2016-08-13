@@ -17,7 +17,6 @@ export default function reducer(state={
       return {...state, fetching: false, error: action.payload}
     }
     case "FETCH_ITEMS_FULFILLED": {
-      console.log(action.payload)
       return {
         ...state,
         fetching: false,

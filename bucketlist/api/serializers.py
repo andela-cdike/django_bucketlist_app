@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from rest_framework import pagination, serializers
+from rest_framework import serializers
 
 from api.custom_pagination import StandardSetPagination
 from api.models import Base, BucketList, BucketListItem
@@ -25,6 +25,14 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    """serialized representation of a user"""
+
+    class Meta:
+        model = User
+        fields = ('username',)
 
 
 class BaseSerializer(serializers.HyperlinkedModelSerializer):

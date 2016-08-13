@@ -1,22 +1,34 @@
 import Radium from "radium";
 import React from "react";
+import { 
+  ButtonGroup, DropdownButton, MenuItem,
+  Nav, Navbar, NavItem, NavDropdown
+} from "react-bootstrap";
+import { connect } from "react-redux";
 import { IndexLink, Link } from "react-router";
 
-const styles = {
-  links: {
-    fontSize: "18px",
-    fontWeight: "500",
-    color: "#00D8FF",
-  }
-}
+import { fetchUser } from "../../actions/userActions";
+
+
+@connect((store) => {
+  return {
+    cookie: store.cookie.cookie,
+    user: store.user.user,
+  };
+})
 
 @Radium
-export default class Nav extends React.Component {
+export default class Navigation extends React.Component {
   constructor() {
     super()
     this.state = {
-        collapsed: true,
+      collapsed: true,
     };
+  }
+
+  componentWillMount() {
+    this.props.dispatch(fetchUser(this.props.cookie.user_token,
+                                  this.props.cookie.user_id));
   }
 
   toggleCollapse() {
@@ -31,27 +43,24 @@ export default class Nav extends React.Component {
     const showNav = location.pathname === "/" ? false : true;
 
     return (
-      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" onClick={this.toggleCollapse.bind(this)}>
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          </div>
-          <div class={"navbar-collapse " + navClass} id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li style={[styles.links]} activeClassName="active" onlyActiveOnIndex={true}>
-                <IndexLink to="/" onClick={this.toggleCollapse.bind(this)}>
-                  {showNav ? <i class="fa fa-chevron-left fa-2x" aria-hidden="true">Back to Bucketlist</i> : null}
-                </IndexLink>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <Navbar inverse fixedTop>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <a href="#">DoDBucket</a>
+          </Navbar.Brand>
+        </Navbar.Header>
+        <Nav pullRight>
+          <NavDropdown eventKey={1} 
+            title={<i class="fa fa-sign-out" aria-hidden="true"></i>} 
+            id="basic-nav-dropdown">
+            <MenuItem eventKey={1.1}>{this.props.user.username}</MenuItem>
+            <MenuItem divider />
+            <MenuItem eventKey={1.2} href={window.location.origin + "/logout/"}>
+              Log out
+            </MenuItem>
+          </NavDropdown>
+        </Nav>
+      </Navbar>
     );
   }
 }

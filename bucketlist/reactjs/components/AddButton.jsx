@@ -1,12 +1,14 @@
-import React from "react";
+// This component handles the addition of new items to the application
 
+import React from "react";
 import { 
   Button, Checkbox, Col, ControlLabel, Form, FormGroup,
   FormControl, Modal, OverlayTrigger, Tooltip 
 } from "react-bootstrap";
+import { findDOMNode } from "react-dom";
 
-import { addBucketlist } from "../actions/bucketlistsActions";
-import { addItem } from "../actions/itemsActions";
+import { addBucketlist, fetchBucketlists } from "../actions/bucketlistsActions";
+import { addItem, fetchItems } from "../actions/itemsActions";
 
 export default class AddButton extends React.Component {
   constructor(props) {
@@ -18,14 +20,23 @@ export default class AddButton extends React.Component {
     };
   }
 
+  focusNameInput() {
+    // focus on name input field when modal loads
+    findDOMNode(this.refs.nameInput).focus();
+  }
+
   addItem() {
-    if (this.props.type === "Bucketlist") {
-      this.props.dispatch(addBucketlist(this.state.name));
+    // add new items to both Bucketlist and bucketlist items
+    const { dispatch, parent_id, token, type} = this.props;
+    const { done, name } = this.state;
+
+    if (type === "Bucketlist") {
+      dispatch(addBucketlist(token, name));
+      dispatch(fetchBucketlists(token))
     }
-    else if (this.props.type === "Item") {
-      this.props.dispatch(addItem(this.props.parent_id,
-                                  this.state.name,
-                                  this.state.done));
+    else if (type === "Item") {
+      dispatch(addItem(token, parent_id, name, done));
+      dispatch(fetchItems(token, parent_id))
     }
     this.setState({ name: "", done: false });
   }
@@ -47,6 +58,24 @@ export default class AddButton extends React.Component {
     this.setState({ done: e.target.checked });
   }
 
+  handleKeyPress(e) {
+    // enter key should submit the form
+    if (e.charCode == 13) {
+      e.preventDefault();
+      if (this.state.name.length > 0) {
+        this.addItem();
+      }
+    }
+  }
+
+  getValidationState() {
+    // give usual cue as to whether current input is valid
+    // i.e. red when empty and green otherwise
+    const length = this.state.name.length;
+    if (length > 0) return 'success';
+    else if (length === 0) return 'error';
+  }
+
   render() {
     const tooltip = (
       <Tooltip id="tooltip">Add {this.props.type}</Tooltip>
@@ -60,14 +89,17 @@ export default class AddButton extends React.Component {
           </Button>
         </OverlayTrigger>
 
-        <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
+        <Modal
+          show={this.state.showModal}
+          onHide={this.close.bind(this)}
+          onEnter={this.focusNameInput.bind(this)}>
           <Modal.Header closeButton>
             <Modal.Title>Add {this.props.type}</Modal.Title>
           </Modal.Header>
           
           <Modal.Body>
             <Form horizontal>
-              <FormGroup controlId="Name">
+              <FormGroup controlId="Name" validationState={this.getValidationState()}>
                 <Col componentClass={ControlLabel} sm={1}>
                   Name
                 </Col>
@@ -76,7 +108,9 @@ export default class AddButton extends React.Component {
                     value={this.state.name}
                     type="text" 
                     placeholder="Crazy list" 
+                    ref="nameInput"
                     onChange={this.handleChange.bind(this)}
+                    onKeyPress={this.handleKeyPress.bind(this)}
                   />
                 </Col>
               </FormGroup>

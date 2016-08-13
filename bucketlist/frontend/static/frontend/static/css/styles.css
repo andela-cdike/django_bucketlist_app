@@ -61,6 +61,10 @@ footer p {
   background: rgba(230,207,155, 0.7);
 }
 
+.cb-slideshow li {
+  list-style: None outside None;
+}
+
 .cb-slideshow li span { 
   width: 100%;
   height: 100%;

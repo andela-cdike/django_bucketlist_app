@@ -1,14 +1,18 @@
 import axios from "axios";
 
-const hostname = window.location.origin;
-const token  = document.cookie.slice(55)
-const baseUrl = hostname + "/api/v1/bucketlists/"
-const config = {
-  headers: {'Authorization': 'Token ' + token}
-};
 
-export function fetchBucketlists(page=1) {
+const hostname = window.location.origin;
+const baseUrl = hostname + "/api/v1/bucketlists/"
+
+function constructConfig(token) {
+  return {
+    headers: {'Authorization': 'JWT ' + token}
+  };
+}
+
+export function fetchBucketlists(token, page=1) {
   const url = baseUrl + "?page=" + page;
+  const config = constructConfig(token)
   return function(dispatch) {
     axios.get(url, config)
       .then((response) => {
@@ -20,8 +24,9 @@ export function fetchBucketlists(page=1) {
   }
 }
 
-export function searchBucketlists(query) {
+export function searchBucketlists(token, query) {
   const url = baseUrl + "?q=" + query;
+  const config = constructConfig(token)
   return function(dispatch) {
     axios.get(url, config)
       .then((response) => {
@@ -33,7 +38,8 @@ export function searchBucketlists(query) {
   }
 }
 
-export function addBucketlist(name) {
+export function addBucketlist(token, name) {
+  const config = constructConfig(token)
   return function(dispatch) {
     axios.post(baseUrl, { name: name }, config)
       .then((response) => {
@@ -46,8 +52,8 @@ export function addBucketlist(name) {
 }
 
 // export function update
-export function editBucketlist(id, name) {
-  console.log("values: ", id, name)
+export function editBucketlist(token, id, name) {
+  const config = constructConfig(token)
   return function(dispatch) {
     axios.put(baseUrl + id, {name: name}, config)
       .then((response) => {
@@ -60,7 +66,8 @@ export function editBucketlist(id, name) {
 }
 
 // export function delete
-export function deleteBucketlist(id) {
+export function deleteBucketlist(token, id) {
+  const config = constructConfig(token)
   return function(dispatch) {
     axios.delete(baseUrl + id, config)
       .then((response) => {

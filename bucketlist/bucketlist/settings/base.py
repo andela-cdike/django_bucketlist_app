@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'djangobower',
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_swagger',
     'api',
     'frontend',
     'webpack_loader',
@@ -149,6 +150,19 @@ REST_FRAMEWORK = {
         'rest_framework.pagination.LimitOffsetPagination',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     )
+}
+
+# Add settings for swagger documentation
+SWAGGER_SETTINGS = {
+    'api_path': '/',
+    'is_authenticated': True,
+    'is_superuser': True,
+    'permission_denied_handler': 'django.contrib.auth.views.login',
+}
+
+# Add settings for JWT
+JWT_AUTH = {
+    'JWT_ALLOW_REFRESH': True,
 }

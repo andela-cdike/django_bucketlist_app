@@ -72,12 +72,11 @@ jQuery(document).ready(function() {
             }
         });
 
+        // ensure that both password fields are equal
         var pass = $('#r-form-password')
         var repass = $('#r-form-repassword')
-        console.log(pass, repass)
         if (pass.val() !== repass.val()) {
             e.preventDefault();
-            console.log("here")
             pass.addClass('input-error');
             repass.addClass('input-error');
         }

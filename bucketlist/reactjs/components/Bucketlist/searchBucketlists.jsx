@@ -28,8 +28,9 @@ export default class SearchBucketlists extends React.Component {
 
   handleKeyPress(e) {
     if (e.charCode == 13) {
-      console.log(this.state.value);
-      this.props.dispatch(searchBucketlists(this.state.value));
+      this.props.dispatch(searchBucketlists(
+        this.props.token, this.state.value
+      ));
     }
   }
 

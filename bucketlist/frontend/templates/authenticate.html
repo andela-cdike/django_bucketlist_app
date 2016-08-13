@@ -60,7 +60,9 @@
                 <div class="col-sm-12 no-left">
                     {% for message in messages %}
                     <div class="alert alert-{{ message.tags }}">
-                        <a class="close" data-dismiss="alert">×</a> {{ message|safe }}
+                        <span>
+                            <span class="close" data-dismiss="alert">&times;</span>
+                            {{ message|safe }}
                     </div>
                     {% endfor %}
                 </div>
@@ -146,5 +148,6 @@
 {% endblock main %}
 
 {% block extended_js %}
+    <script src="{%static 'frontend/static/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'frontend/static/js/scripts.js' %}"></script>
 {% endblock extended_js %}

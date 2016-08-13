@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from rest_framework import generics, permissions
-from rest_framework.decorators import api_view
+from rest_framework import generics, permissions, renderers, response, schemas
+from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
@@ -10,7 +10,8 @@ from api.custom_permissions import IsOwner, IsParentId
 from api.custom_pagination import StandardSetPagination
 from api.models import BucketList, BucketListItem
 from api.serializers import BucketListAllSerializer, \
-    BucketListDetailSerializer, BucketListItemSerializer, UserSerializer
+    BucketListDetailSerializer, BucketListItemSerializer, \
+    UserDetailSerializer, UserSerializer
 
 
 @api_view(['GET'])
@@ -38,18 +39,26 @@ class MultipleFieldLookupMixin(object):
 
 
 class UserList(generics.CreateAPIView):
+    """
+    View for registering users
+    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 class UserDetail(generics.RetrieveAPIView):
+    """
+    View for fetching a single user
+    """
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserDetailSerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 class BucketListAll(generics.ListCreateAPIView):
     """
-    List all code snippets, or create a new bucketlist.
+    List all user's bucketlists, or create a new bucketlist.
     """
     queryset = BucketList.objects.all()
     serializer_class = BucketListAllSerializer
@@ -83,7 +92,8 @@ class BucketListDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class BucketListItemAll(generics.ListCreateAPIView):
     """
-    Create a new bucketlist item.
+    API view for creating a new bucketlist item or listing all items
+    in this bucketlist
     """
     permission_classes = (permissions.IsAuthenticated, IsParentId)
     queryset = BucketListItem.objects.all()

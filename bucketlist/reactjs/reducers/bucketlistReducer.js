@@ -36,6 +36,9 @@ export default function reducer(state={
         ...state,
         fetching: false,
         fetched: true,
+        count: action.payload.count,
+        previous: action.payload.previous,
+        next: action.payload.next,
         bucketlists: action.payload.results,
       }
     }
