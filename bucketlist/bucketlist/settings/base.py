@@ -156,10 +156,14 @@ REST_FRAMEWORK = {
 
 # Add settings for swagger documentation
 SWAGGER_SETTINGS = {
-    'api_path': '/',
-    'is_authenticated': True,
-    'is_superuser': True,
-    'permission_denied_handler': 'django.contrib.auth.views.login',
+    'info': {
+        'contact': 'uzo.awili@andela.com',
+        'description': 'This is a simple bucket list application. '
+                       'You can find out more about DoDBucket on '
+                       '<a href="https://github.com/andela-cdike/django_bucketlist_application">'
+                       'GitHub</a>.',
+        'title': 'BucketList API',
+    },
 }
 
 # Add settings for JWT
