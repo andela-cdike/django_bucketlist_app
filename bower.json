@@ -20,6 +20,6 @@
     "jquery": "~2.2.4",
     "react": "~15.2.1",
     "react-bootstrap": "~0.29.5",
-    "bootstrap": "~3.3.7",
+    "bootstrap": "~3.3.7"
   }
 }

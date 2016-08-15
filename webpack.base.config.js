@@ -11,7 +11,7 @@ module.exports = {
     },
 
     output: {
-        path: path.resolve('./frontend/static/bundles/local/'),
+        path: path.resolve('./bucketlist/frontend/static/bundles/local/'),
         filename: "[name]-[hash].js"
     },
 
