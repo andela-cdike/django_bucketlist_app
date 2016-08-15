@@ -19,11 +19,12 @@ DATABASES['default']['ENGINE'] = 'django_postgrespool'
 
 
 BOWER_COMPONENTS_ROOT = os.path.join(
-    APPLICATION_DIR, '..', '..', 'frontend', 'static'
+    APPLICATION_DIR, '..', '..', 'frontend', 'static', 'frontend', 'static'
 )
 
 BOWER_PATH = 'app/node_modules/bower'
-
+print BOWER_COMPONENTS_ROOT
+print BOWER_PATH
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ALLOWED_HOSTS = ['*']
