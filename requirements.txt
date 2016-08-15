@@ -4,6 +4,7 @@ dj-static==0.0.6
 Django==1.9.7
 django-bower==5.1.0
 django-envie==0.0.9
+django-filter==0.14.0
 django-rest-swagger==0.3.4
 django-toolbelt==0.0.1
 django-webpack-loader==0.3.0
@@ -14,6 +15,7 @@ Fabric==1.11.1
 gunicorn==19.6.0
 httpie==0.9.3
 itypes==1.1.0
+Markdown==2.6.6
 openapi-codec==1.0.0
 paramiko==1.17.1
 psycopg2==2.6.2
@@ -26,3 +28,4 @@ simplejson==3.8.2
 six==1.10.0
 static3==0.7.0
 uritemplate==0.6
+whitenoise==3.2.1

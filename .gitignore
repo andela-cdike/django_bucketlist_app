@@ -76,6 +76,7 @@ target/
 celerybeat-schedule
 
 # dotenv
+.env
 .env.*
 
 # virtualenv
@@ -90,3 +91,9 @@ ENV/
 
 # NodeJS modules
 node_modules/
+
+# bower components
+bucketlist/frontend/static/frontend/static/bower_components
+
+# staticfiles
+bucketlist/frontend/staticfiles

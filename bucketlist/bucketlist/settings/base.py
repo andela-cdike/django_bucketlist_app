@@ -119,10 +119,17 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(os.path.dirname(BASE_DIR), 'frontend/static'),
+    os.path.join(os.path.dirname(BASE_DIR), 'frontend/static')
 ]
 
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'frontend/staticfiles')
+
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -130,13 +137,17 @@ STATICFILES_FINDERS = (
     'djangobower.finders.BowerFinder',
 )
 
-BOWER_COMPONENTS_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'frontend/static')
+BOWER_COMPONENTS_ROOT = os.path.join(
+    os.path.dirname(BASE_DIR),
+    'frontend/static'
+)
 
 BOWER_INSTALLED_APPS = (
     'font-awesome#4.6.3',
     'jquery#2.2.4',
     'react#15.2.1',
     'react-bootstrap#0.29.5',
+    'bootstrap#3.3.7',
 )
 
 # redirect user to his lists of bucketlist after login
