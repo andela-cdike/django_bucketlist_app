@@ -157,7 +157,7 @@ REST_FRAMEWORK = {
 # Add settings for swagger documentation
 SWAGGER_SETTINGS = {
     'info': {
-        'contact': 'uzo.awili@andela.com',
+        'contact': 'chukwuerika.dike@andela.com',
         'description': 'This is a simple bucket list application. '
                        'You can find out more about DoDBucket on '
                        '<a href="https://github.com/andela-cdike/django_bucketlist_application">'
