@@ -2,9 +2,6 @@
 Production specific settings for the django bucketlist project
 """
 
-from django_envie.workroom import convertfiletovars
-convertfiletovars()
-
 import os
 
 import dj_database_url
