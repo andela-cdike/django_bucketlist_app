@@ -37,8 +37,10 @@
     "react-packery-component": "^1.0.2"
   },
   "scripts": {
+    "preinstall": "npm install --save bower",
     "dev": "./node_modules/.bin/webpack-dev-server --content-base src --inline --hot",
     "build_webpack": "./node_modules/.bin/webpack --config webpack.local.config.js",
+    "postinstall": "./node_modules/.bin/bower install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Chukwuerika Dike",
