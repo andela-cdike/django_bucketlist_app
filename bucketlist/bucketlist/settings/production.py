@@ -8,14 +8,10 @@ import dj_database_url
 
 from .base import *
 
-print "HELLO %s" % os.getenv('SECRET_KEY')
+
 DATABASES = {
     'default': dj_database_url.config()
 }
-
-# Enable Connection Pooling
-DATABASES['default']['ENGINE'] = 'django_postgrespool'
-
 
 BOWER_PATH = 'app/node_modules/bower'
 
