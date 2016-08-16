@@ -19,7 +19,6 @@ DATABASES = {
     }
 }
 
-
 # Setting for webpack_loader
 WEBPACK_LOADER = {
     'DEFAULT': {
