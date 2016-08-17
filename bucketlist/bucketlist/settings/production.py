@@ -23,7 +23,7 @@ ALLOWED_HOSTS = ['*']
 # Setting for webpack_loader
 WEBPACK_LOADER = {
     'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'bundles/local/',
+        'BUNDLE_DIR_NAME': 'bundles/prod/',
         'STATS_FILE': os.path.join(BASE_DIR, '../../webpack-stats-prod.json'),
     }
 }
