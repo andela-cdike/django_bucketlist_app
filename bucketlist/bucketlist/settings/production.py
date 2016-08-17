@@ -7,7 +7,7 @@ import os
 import dj_database_url
 
 from .base import *
-
+DEBUG = True
 
 DATABASES = {
     'default': dj_database_url.config()
@@ -24,6 +24,6 @@ ALLOWED_HOSTS = ['*']
 WEBPACK_LOADER = {
     'DEFAULT': {
         'BUNDLE_DIR_NAME': 'bundles/local/',
-        'STATS_FILE': os.path.join(BASE_DIR, '../webpack-stats-prod.json'),
+        'STATS_FILE': os.path.join(BASE_DIR, '../../webpack-stats-prod.json'),
     }
 }

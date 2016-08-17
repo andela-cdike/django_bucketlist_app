@@ -7,6 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.template.context_processors import csrf
 from django.core.urlresolvers import reverse
+from rest_framework_jwt.settings import api_settings
 from django.shortcuts import HttpResponseRedirect, render
 from django.utils.decorators import method_decorator
 from django.views.generic import View
@@ -59,14 +60,23 @@ class UserLoginView(View):
 
         if auth_form.is_valid():
             login(request, auth_form.get_user())
+            # print "*****************************************"
+            # print request.get_host()
+            # url = 'http://' + request.get_host() + '/api/v1/auth/login'
+            # data = {
+            #     'username': auth_form.cleaned_data['username'],
+            #     'password': auth_form.cleaned_data['password']
+            # }
+            # print url
+            # api_response = requests.post(url, json=data)
+            # print api_response.json()
+            # print "*****************************************"
+            # user_token = api_response.json()['token']
+            jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+            jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
-            url = 'http://' + request.get_host() + '/api/v1/auth/login/'
-            data = {
-                'username': auth_form.cleaned_data['username'],
-                'password': auth_form.cleaned_data['password']
-            }
-            api_response = requests.post(url, json=data)
-            user_token = api_response.json()['token']
+            payload = jwt_payload_handler(auth_form.get_user())
+            user_token = jwt_encode_handler(payload)
 
             response = HttpResponseRedirect(reverse('bucketlists'))
             response.set_cookie('user_token', user_token)
