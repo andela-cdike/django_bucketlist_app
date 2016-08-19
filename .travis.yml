@@ -30,9 +30,7 @@ deploy:
   buildpack:
     - node
     - python
-  app:
-    master: dothebucket
-    production: dothebucket
+  app: dothebucket
   on:
     all_branches: true
   run:
@@ -40,5 +38,3 @@ deploy:
     - "python bucketlist/manage.py collectstatic --noinput --settings=bucketlist.settings.production"
     - "python bucketlist/manage.py makemigrations --settings=bucketlist.settings.production"
     - "python bucketlist/manage.py migrate --settings=bucketlist.settings.production"
-  after_deploy:
-    - "heroku ps:scale web=1 --app dothebucket"
