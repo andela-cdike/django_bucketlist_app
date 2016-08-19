@@ -1,11 +1,9 @@
 """Script used to test bucketlist reponse and request."""
 
 from django.core.urlresolvers import reverse_lazy
-from django.contrib.auth.models import User
 from rest_framework import status
-from rest_framework.test import APITestCase, APIClient
 
-from .utils import ApiHeaderAuthorization
+from .utils import ApiHeaderAuthorization, ApiHeaderWrongAuthorization
 
 
 class ApiBucketListTestCase(ApiHeaderAuthorization):
@@ -61,22 +59,17 @@ class ApiBucketListTestCase(ApiHeaderAuthorization):
         self.assertEqual(response.status_code, 404)
 
 
-class BucketListViewNoAuthorizationTestCase(APITestCase):
+class BucketListViewNoAuthorizationTestCase(ApiHeaderWrongAuthorization):
     """
     Tests to confirm that users cannot access bucketlists that aren't theirs
     """
 
     fixtures = ['users', 'initial_data']
 
-    def setUp(self):
-        User.objects.create_user(username='madara', password='kenkeigenkai')
-        self.client = APIClient()
-        self.client.login(username='madara', password='kenkeigenkai')
-
     def test_user_has_no_bucketlist(self):
         url = reverse_lazy('bucketlist-list')
         response = self.client.get(url)
-        self.assertEqual(response.json(), [])
+        self.assertEqual(response.json()['results'], [])
 
     def test_user_can_not_read_anothers_bucketlist(self):
         url = reverse_lazy('bucketlist-detail', kwargs={'pk': 1})

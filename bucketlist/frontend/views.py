@@ -1,5 +1,3 @@
-import requests
-
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
@@ -60,18 +58,8 @@ class UserLoginView(View):
 
         if auth_form.is_valid():
             login(request, auth_form.get_user())
-            # print "*****************************************"
-            # print request.get_host()
-            # url = 'http://' + request.get_host() + '/api/v1/auth/login'
-            # data = {
-            #     'username': auth_form.cleaned_data['username'],
-            #     'password': auth_form.cleaned_data['password']
-            # }
-            # print url
-            # api_response = requests.post(url, json=data)
-            # print api_response.json()
-            # print "*****************************************"
-            # user_token = api_response.json()['token']
+
+            # obtain JW token
             jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
             jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 

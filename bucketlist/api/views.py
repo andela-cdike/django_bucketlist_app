@@ -44,7 +44,6 @@ class UserList(generics.CreateAPIView):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (permissions.IsAuthenticated,)
 
 
 class UserDetail(generics.RetrieveAPIView):

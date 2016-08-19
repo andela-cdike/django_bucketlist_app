@@ -3,9 +3,8 @@
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
 from rest_framework import status
-from rest_framework.test import APITestCase, APIClient
 
-from .utils import ApiHeaderAuthorization
+from .utils import ApiHeaderAuthorization, ApiHeaderWrongAuthorization
 
 
 class ApiBucketListItemTestCase(ApiHeaderAuthorization):
@@ -33,17 +32,12 @@ class ApiBucketListItemTestCase(ApiHeaderAuthorization):
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
 
-class BucketListItemViewNoAuthorizationTestCase(APITestCase):
+class BucketListItemViewNoAuthorizationTestCase(ApiHeaderWrongAuthorization):
     """
     Tests to confirm that users cannot access bucketlists that aren't theirs
     """
 
     fixtures = ['users', 'initial_data']
-
-    def setUp(self):
-        User.objects.create_user(username='madara', password='kenkeigenkai')
-        self.client = APIClient()
-        self.client.login(username='madara', password='kenkeigenkai')
 
     def test_user_can_not_read_anothers_item(self):
         url = reverse_lazy('item-list', kwargs={'bucketlist': 1})
