@@ -27,10 +27,10 @@ class APIAccessTestCAse(APITestCase):
         credentials = {'username': 'itachi', 'password': 'lifidum'}
         url = reverse_lazy('user-login')
         response = self.client.post(url, credentials, format='json')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn('token', response.json())
 
     def test_user_can_not_view_bucketlist_without_authentication(self):
         url = reverse_lazy('bucketlist-list')
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)

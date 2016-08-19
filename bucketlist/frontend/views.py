@@ -35,7 +35,7 @@ class UserLoginView(View):
 
     Raw
     """
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         """
         Handles the GET request to the 'login' named route.
 
@@ -50,7 +50,7 @@ class UserLoginView(View):
         })
         return render(request, 'authenticate.html', args)
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         """
         Process form data on POST requests
         """
@@ -88,7 +88,7 @@ class UserLogoutView(View):
     """
     This class logs out an authenticated user from session.
     """
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         logout(request)
         return HttpResponseRedirect(reverse('login'))
 
@@ -104,7 +104,7 @@ class UserRegistrationView(View):
              redirects to the login page.
     """
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         """
         Handles the GET request to the 'register' named route.
         Returns: A HTTP Response with register template.
@@ -118,7 +118,7 @@ class UserRegistrationView(View):
         })
         return render(request, 'authenticate.html', args)
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         """
         Process form data on Post requests
         """

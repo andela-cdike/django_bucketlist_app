@@ -1,10 +1,7 @@
 from django.contrib.auth.models import User
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from rest_framework import generics, permissions, renderers, response, schemas
-from rest_framework.decorators import api_view, renderer_classes
-from rest_framework.response import Response
-from rest_framework.reverse import reverse
+from rest_framework import generics, permissions
 
 from api.custom_permissions import IsOwner, IsParentId
 from api.custom_pagination import StandardSetPagination
@@ -12,15 +9,6 @@ from api.models import BucketList, BucketListItem
 from api.serializers import BucketListAllSerializer, \
     BucketListDetailSerializer, BucketListItemSerializer, \
     UserDetailSerializer, UserSerializer
-
-
-@api_view(['GET'])
-def api_root(request, format=None):
-    return Response({
-        'users': reverse('user-register', request=request, format=format),
-        'bucketlists': reverse('bucketlist-list', request=request,
-                               format=format),
-    })
 
 
 class MultipleFieldLookupMixin(object):

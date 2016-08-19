@@ -20,5 +20,8 @@ class IsParentId(permissions.BasePermission):
     bucketlists IDs that aren't owned by the current user
     """
     def has_permission(self, request, view):
-        owner = BucketList.objects.get(pk=view.kwargs['bucketlist']).owner
-        return request.user == owner
+        try:
+            owner = BucketList.objects.get(pk=view.kwargs['bucketlist']).owner
+            return request.user == owner
+        except BucketList.DoesNotExist:
+            pass
