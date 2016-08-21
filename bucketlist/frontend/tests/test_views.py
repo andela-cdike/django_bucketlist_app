@@ -19,7 +19,7 @@ class UserLoginViewTestSuite(LiveServerTestCase):
         """
         Setup the test driver
         """
-        cls.driver = webdriver.PhantomJS()
+        cls.driver = webdriver.Firefox()
         super(UserLoginViewTestSuite, cls).setUpClass()
 
     def setUp(self):
@@ -138,7 +138,7 @@ class UserRegisterViewTestSuite(LiveServerTestCase):
         """
         Setup the test driver
         """
-        cls.driver = webdriver.PhantomJS()
+        cls.driver = webdriver.Firefox()
         super(UserRegisterViewTestSuite, cls).setUpClass()
 
     def setUp(self,):
@@ -157,7 +157,6 @@ class UserRegisterViewTestSuite(LiveServerTestCase):
         """
         url = "%s%s" % (self.live_server_url, reverse('register'))
         self.driver.get(url)
-        self.driver.implicitly_wait(20)
         self.driver.find_element_by_id("r-form-username").send_keys('rikky')
         self.driver.find_element_by_id(
             "r-form-email").send_keys('rikky@gmail.com')
