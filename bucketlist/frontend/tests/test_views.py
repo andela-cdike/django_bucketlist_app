@@ -19,7 +19,7 @@ class UserLoginViewTestSuite(LiveServerTestCase):
         """
         Setup the test driver
         """
-        cls.driver = webdriver.Firefox()
+        cls.driver = webdriver.PhantomJS()
         super(UserLoginViewTestSuite, cls).setUpClass()
 
     def setUp(self):
@@ -138,7 +138,7 @@ class UserRegisterViewTestSuite(LiveServerTestCase):
         """
         Setup the test driver
         """
-        cls.driver = webdriver.Firefox()
+        cls.driver = webdriver.PhantomJS()
         super(UserRegisterViewTestSuite, cls).setUpClass()
 
     def setUp(self,):
