@@ -24,4 +24,4 @@ class IsParentId(permissions.BasePermission):
             owner = BucketList.objects.get(pk=view.kwargs['bucketlist']).owner
             return request.user == owner
         except BucketList.DoesNotExist:
-            pass
+            return True

@@ -1,6 +1,5 @@
-from django.contrib.auth import password_validation
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import UserCreationForm
 from django import forms
 
 
@@ -33,11 +32,3 @@ class RegisterForm(UserCreationForm):
         if commit:
             user.save()
         return user
-
-
-class LoginForm(AuthenticationForm):
-    """This represents a form for registering users"""
-
-    class Meta:
-        model = User
-        fields = ('username', 'password')

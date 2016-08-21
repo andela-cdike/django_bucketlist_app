@@ -1,5 +1,4 @@
 from django.conf.urls import url, include
-from rest_framework.authtoken import views as authtoken_views
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 

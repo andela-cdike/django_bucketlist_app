@@ -16,7 +16,7 @@ install:
 script:
   - bower install --settings=bucketlist.settings.test
   - python bucketlist/manage.py collectstatic --noinput --settings=bucketlist.settings.test
-  - coverage run --source=. bucketlist/manage.py test bucketlist/api --noinput --settings=bucketlist.settings.test
+  - coverage run --source=api,frontend bucketlist/manage.py test bucketlist --noinput --settings=bucketlist.settings.test
 
 # run coveralls after successful tests
 after_success:

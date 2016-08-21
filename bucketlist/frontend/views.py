@@ -10,7 +10,7 @@ from django.shortcuts import HttpResponseRedirect, render
 from django.utils.decorators import method_decorator
 from django.views.generic import View
 
-from frontend.forms import LoginForm, RegisterForm
+from frontend.forms import RegisterForm
 
 
 class LoginRequiredMixin(object):
@@ -41,7 +41,7 @@ class UserLoginView(View):
 
         Returns: A HTTP Response with authentication template
         """
-        login_form = LoginForm()
+        login_form = AuthenticationForm()
         args = {}
         args.update(csrf(request))
         args.update({
@@ -65,8 +65,7 @@ class UserLoginView(View):
 
             payload = jwt_payload_handler(auth_form.get_user())
             user_token = jwt_encode_handler(payload)
-
-            response = HttpResponseRedirect(reverse('bucketlists'))
+            response = HttpResponseRedirect(reverse('home'))
             response.set_cookie('user_token', user_token)
             response.set_cookie('user_id', request.user.id)
             request.session.set_expiry(600)
@@ -160,7 +159,7 @@ class UserRegistrationView(View):
             )
 
 
-class BucketlistAppView(LoginRequiredMixin, View):
+class HomeView(LoginRequiredMixin, View):
     """
     This view points to the bucketlist frontend app.
     Most of this section is implemented in reactJS folder.
@@ -170,4 +169,4 @@ class BucketlistAppView(LoginRequiredMixin, View):
         """
         Renders the bucketlist template
         """
-        return render(request, 'bucketlists.html')
+        return render(request, 'home.html')

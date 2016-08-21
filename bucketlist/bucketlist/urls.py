@@ -15,17 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.contrib.auth import views
 
-from frontend.forms import LoginForm
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/v1/', include('api.urls')),
     url(r'', include('frontend.urls')),
-    url(r'^login/$', views.login,
-        {'template_name': 'login.html', 'authentication_form': LoginForm}),
-    url(r'^logout/$', views.logout, {'next_page': '/login'}),
     url(r'^api/v1/login', include('rest_framework.urls',
                                   namespace='rest_framework')),
 ]

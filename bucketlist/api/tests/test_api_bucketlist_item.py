@@ -23,7 +23,7 @@ class ApiBucketListItemTestCase(ApiHeaderAuthorization):
         url = reverse_lazy('item-list', kwargs={'bucketlist': 101})
         data = {'name': 'Learn Kung fu'}
         response = self.client.post(url, data)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_user_can_update_item(self):
         url = reverse_lazy('item-detail', kwargs={'bucketlist': 1, 'pk': 2})

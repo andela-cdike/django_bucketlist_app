@@ -1,14 +1,14 @@
 from django.conf.urls import url
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from frontend.views import BucketlistAppView, \
+from frontend.views import HomeView, \
     UserLoginView, UserLogoutView, UserRegistrationView
 
 urlpatterns = format_suffix_patterns([
     # pattern maps to view handling `GET` requests to /
     url(r'^$',
-        BucketlistAppView.as_view(),
-        name='bucketlists'),
+        HomeView.as_view(),
+        name='home'),
 
     # pattern maps to view handling `GET` & `POST` requests to
     # /register/
