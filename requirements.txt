@@ -26,6 +26,7 @@ PyJWT==1.4.2
 python-coveralls==2.7.0
 PyYAML==3.11
 requests==2.11.0
+selenium==2.53.6
 sh==1.11
 simplejson==3.8.2
 six==1.10.0
