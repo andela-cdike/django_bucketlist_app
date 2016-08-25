@@ -72,11 +72,11 @@ Others can be viewed in the requirements.txt and package.json files found in pro
 
 #### Run Project Locally
 After successfully installing project on your machine, run server with:
-`$ python bucketlist/manage.py runserver`
+```$ python bucketlist/manage.py runserver```
 
 ## Tests
 To run tests:
-`$ python bucketlist/manage.py test --settings=bucketlist.settings.testing`
+```$ python bucketlist/manage.py test --settings=bucketlist.settings.testing```
 
 For coverage report:
 ```cmd

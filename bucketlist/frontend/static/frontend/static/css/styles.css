@@ -210,6 +210,11 @@ footer p {
   text-align: left;
 }
 
+.form-control {
+  background-color: rgba(230,207,155, 0.3);
+  border: none;
+}
+
 .show-register-form, .show-forms-divider, .show-login-form { opacity: 0.6; }
 .show-register-form, .show-login-form {
   cursor: pointer;
@@ -247,6 +252,42 @@ footer p {
   border-color: #e6cf9b;
 }
 
+.navbar-inverse .navbar-brand {
+  color: #fffff0;
+}
+
+.navbar-inverse .navbar-brand:hover {
+  color: #fff;
+}
+
+.navbar-brand {
+  font-family: 'Rock Salt', cursive;
+  font-size: 30px;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  font-size: 23px;
+  color: #fffff0;
+}
+
+
+.navbar-inverse .navbar-nav > li > a:hover {
+  color: #fff;
+}
+
+.dropdown-menu {
+  background-color: #f9fad2;
+}
+
+.dropdown-menu > li > a {
+  color: #45818e;
+}
+
+.dropdown-menu > li > a:hover {
+  color: #193A41;
+  background-color: rgba(230,207,155, 0.3);
+}
+
 .modal-content {
   background: #f9fad2;
 }
@@ -255,13 +296,20 @@ footer p {
   background: #e6cf9b;
 }
 
-.btn-del {
-  margin-right: 5px;
+.btn-primary {
+  background-color: #45818e;
+  border-color: #45818e;
 }
 
-.btn-primary {
-  background-color: #45818E;
-  border-color: #45818E;
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #193A41;
+  border-color: #193A41;
+}
+
+.btn-del {
+  margin-right: 5px;
 }
 
 .sub-heading {
@@ -292,8 +340,8 @@ footer p {
 }
 
 .search-input-box {
-  background-color: #f9fad2;
-  color: #45818E;
+  background-color: rgba(230,207,155, 0.3);
+  color: #45818e;
 }
 
 .empty-notice h3{
@@ -305,8 +353,16 @@ footer p {
 .card {
   position: relative;
   margin: 10px;
-  color: #45818E;
+  color: #45818e;
   background-color: #f9fad2;
+}
+
+.card > a {
+  color: #45818e;
+}
+
+.card > a:hover {
+  color: #193A41;
 }
 
 .card:before {
@@ -316,7 +372,7 @@ footer p {
   right: 0;
   border-width: 0 20px 20px 0;
   border-style: solid;
-  border-color: #45818E #e0e1bd;
+  border-color: #45818e #e0e1bd;
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
   -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
   box-shadow: 0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
@@ -345,9 +401,9 @@ footer p {
 }
 
 .pagination > .active > a {
-  background-color:  #45818E;
+  background-color:  #45818e;
 }
 
 .pagination > .active > a:hover {
-  background-color:  #286090;
+  background-color:  #193A41;
 }

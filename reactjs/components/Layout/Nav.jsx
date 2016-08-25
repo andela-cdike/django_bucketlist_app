@@ -46,7 +46,7 @@ export default class Navigation extends React.Component {
       <Navbar inverse fixedTop>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">DoDBucket</a>
+            <a href="#">DotheBucket</a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
@@ -55,7 +55,7 @@ export default class Navigation extends React.Component {
             <NavDropdown eventKey={1} 
               title={<i class="fa fa-sign-out" aria-hidden="true"></i>} 
               id="basic-nav-dropdown">
-              <MenuItem eventKey={1.1}>{this.props.user.username}</MenuItem>
+              <MenuItem eventKey={1.1} disabled>{this.props.user.username}</MenuItem>
               <MenuItem divider />
               <MenuItem eventKey={1.2} href={window.location.origin + "/logout/"}>
                 Log out
