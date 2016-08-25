@@ -1,14 +1,15 @@
 import axios from "axios";
 
+import { constructConfig } from "./common";
+import { logoutIfTokenExpired } from "../utils/refreshToken";
+
+
 const hostname = window.location.origin;
 
-function constructConfig(token) {
-  return {
-    headers: {'Authorization': 'JWT ' + token}
-  };
-}
 
+// fetches current user from the server
 export function fetchUser(token, id) {
+  logoutIfTokenExpired(token); // logout the user if token has expired
   const url = hostname + "/api/v1/users/" + id + "/";
   const config = constructConfig(token)
   return function(dispatch) {

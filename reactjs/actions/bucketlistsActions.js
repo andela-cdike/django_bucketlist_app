@@ -1,16 +1,18 @@
 import axios from "axios";
 
+import { constructConfig } from "./common";
+import { logoutIfTokenExpired } from "../utils/refreshToken";
+
 
 const hostname = window.location.origin;
 const baseUrl = hostname + "/api/v1/bucketlists/"
 
-function constructConfig(token) {
-  return {
-    headers: {'Authorization': 'JWT ' + token}
-  };
-}
 
+// Action fetches paginated bucketlists from server
+// returns bucketlist received from server if successful
+// otherwise returns error
 export function fetchBucketlists(token, page=1) {
+  logoutIfTokenExpired(token); 
   const url = baseUrl + "?page=" + page;
   const config = constructConfig(token)
   return function(dispatch) {
@@ -24,7 +26,9 @@ export function fetchBucketlists(token, page=1) {
   }
 }
 
+// Action queries database on server for bucketlists that match query
 export function searchBucketlists(token, query) {
+  logoutIfTokenExpired(token); // logout the user if token has expired
   const url = baseUrl + "?q=" + query;
   const config = constructConfig(token)
   return function(dispatch) {
@@ -38,7 +42,9 @@ export function searchBucketlists(token, query) {
   }
 }
 
+// Creates a new bucketlist on server
 export function addBucketlist(token, name) {
+  logoutIfTokenExpired(token); // logout the user if token has expired
   const config = constructConfig(token)
   return function(dispatch) {
     axios.post(baseUrl, { name: name }, config)
@@ -51,8 +57,9 @@ export function addBucketlist(token, name) {
   }
 }
 
-// export function update
+// Action edits a bucketlist on the server
 export function editBucketlist(token, id, name) {
+  logoutIfTokenExpired(token); // logout the user if token has expired
   const config = constructConfig(token)
   return function(dispatch) {
     axios.put(baseUrl + id, {name: name}, config)
@@ -65,8 +72,9 @@ export function editBucketlist(token, id, name) {
   }
 }
 
-// export function delete
+// delete bucketlist from server
 export function deleteBucketlist(token, id) {
+  logoutIfTokenExpired(token); // logout the user if token has expired
   const config = constructConfig(token)
   return function(dispatch) {
     axios.delete(baseUrl + id, config)

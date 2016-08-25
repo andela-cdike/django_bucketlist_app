@@ -2,15 +2,32 @@ import jwtDecode from "jwt-decode";
 
 import { refreshToken } from "../actions/bucketlistsActions";
 
-
-export function shouldRefreshToken(token) {
-  // refresh token if it has less than two minutes to expire
-  const threshold = 297;
-  const timeToExpire = jwtDecode(token).exp;
+// returns the time left till token expires
+function getTimeLeftToExpire(token) {
+  const expiryTime = jwtDecode(token).exp;
   const now = Math.floor(new Date().getTime() / 1000);
+  const timeLeftToExpire = expiryTime - now;
+  console.log('timeToExpire: ', timeLeftToExpire)
+  return timeLeftToExpire;
+}
 
-  if (timeToExpire - now < threshold) {
-    console.log('hey')
+// logout user if token has expired
+export function logoutIfTokenExpired(token) {
+  console.log(token)
+  const timeLeftToExpire = getTimeLeftToExpire(token);
+
+  if (timeLeftToExpire < 0) {
+    window.location.href = window.location.origin + "/logout/";
+    return;
+  }
+}
+
+// refresh token if it has less than two minutes to expire
+export function shouldRefreshToken(token) {
+  const threshold = 120;
+  const timeLeftToExpire = getTimeLeftToExpire(token);
+
+  if (timeLeftToExpire < threshold) {
     return true;    
   }
   return false;

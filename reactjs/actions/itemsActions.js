@@ -1,16 +1,16 @@
 import axios from "axios";
 
+import { constructConfig } from "./common";
+import { logoutIfTokenExpired } from "../utils/refreshToken";
+
+
 const hostname = window.location.origin;
 const baseUrl = hostname + "/api/v1/bucketlists/"
 
 
-function constructConfig(token) {
-  return {
-    headers: {'Authorization': 'JWT ' + token}
-  };
-}
-
+// fetch bucketlist items from the server
 export function fetchItems(token, parent_id, page=1) {
+  logoutIfTokenExpired(token); // logout the user if token has expired
   const url = baseUrl + parent_id + "?page=" + page;
   const config = constructConfig(token)
   return function(dispatch) {
@@ -24,7 +24,9 @@ export function fetchItems(token, parent_id, page=1) {
   }
 }
 
+// add new item to server
 export function addItem(token, parent_id, name, done) {
+  logoutIfTokenExpired(token); // logout the user if token has expired
   const url = baseUrl + parent_id + "/items/"
   const config = constructConfig(token)
   return function(dispatch) {
@@ -38,8 +40,10 @@ export function addItem(token, parent_id, name, done) {
   }
 }
 
-// export function edit
+
+// edit bucketlist item on the server
 export function editItem(token, parent_id, id, name, done) {
+  logoutIfTokenExpired(token); // logout the user if token has expired
   const url = baseUrl + parent_id + "/items/" + id; 
   const config = constructConfig(token)
   return function(dispatch) {
@@ -53,8 +57,9 @@ export function editItem(token, parent_id, id, name, done) {
   }
 }
 
-// export function delete
+// delete bucketlist item from server
 export function deleteItem(token, parent_id, id) {
+  logoutIfTokenExpired(token); // logout the user if token has expired
   const url = baseUrl + parent_id + "/items/" + id;
   const config = constructConfig(token)
   return function(dispatch) {
