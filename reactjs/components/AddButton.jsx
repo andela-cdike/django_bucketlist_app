@@ -1,9 +1,6 @@
-// This component handles the addition of new items to the application
 
 import React from "react";
 import { 
-  Button, Checkbox, Col, ControlLabel, Form, FormGroup,
-  FormControl, Modal, OverlayTrigger, Tooltip 
 } from "react-bootstrap";
 import { findDOMNode } from "react-dom";
 
@@ -50,8 +47,9 @@ export default class AddButton extends React.Component {
   }
 
   handleChange(e) {
+    const field = e.target.id;
     const name = e.target.value;
-    this.setState({ name: name});
+    this.setState({ [field]: name});
   }
 
   handleClick(e) {
@@ -99,7 +97,7 @@ export default class AddButton extends React.Component {
           
           <Modal.Body>
             <Form horizontal>
-              <FormGroup controlId="Name" validationState={this.getValidationState()}>
+              <FormGroup controlId="name" validationState={this.getValidationState()}>
                 <Col componentClass={ControlLabel} sm={1}>
                   Name
                 </Col>

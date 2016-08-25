@@ -48,18 +48,21 @@ export default class Navigation extends React.Component {
           <Navbar.Brand>
             <a href="#">DoDBucket</a>
           </Navbar.Brand>
+          <Navbar.Toggle />
         </Navbar.Header>
-        <Nav pullRight>
-          <NavDropdown eventKey={1} 
-            title={<i class="fa fa-sign-out" aria-hidden="true"></i>} 
-            id="basic-nav-dropdown">
-            <MenuItem eventKey={1.1}>{this.props.user.username}</MenuItem>
-            <MenuItem divider />
-            <MenuItem eventKey={1.2} href={window.location.origin + "/logout/"}>
-              Log out
-            </MenuItem>
-          </NavDropdown>
-        </Nav>
+        <Navbar.Collapse>
+          <Nav pullRight>
+            <NavDropdown eventKey={1} 
+              title={<i class="fa fa-sign-out" aria-hidden="true"></i>} 
+              id="basic-nav-dropdown">
+              <MenuItem eventKey={1.1}>{this.props.user.username}</MenuItem>
+              <MenuItem divider />
+              <MenuItem eventKey={1.2} href={window.location.origin + "/logout/"}>
+                Log out
+              </MenuItem>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
     );
   }

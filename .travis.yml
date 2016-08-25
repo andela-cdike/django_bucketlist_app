@@ -13,7 +13,7 @@ install:
   - pip install -r requirements.txt
   - npm install bower
 
-# run this before running test scripts
+# run this before running test scripts to open a display for selenium tests
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"

@@ -101,7 +101,6 @@ export default function reducer(state={
       }
     }
     case "DELETE_BUCKETLIST_FULFILLED": {
-      console.log('here: ', action.payload)
       return {
         ...state,
         bucketlists: state.bucketlists.filter(bucketlist => bucketlist.id !== action.payload),

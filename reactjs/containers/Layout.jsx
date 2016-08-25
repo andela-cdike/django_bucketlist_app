@@ -12,6 +12,7 @@ import Nav from "../components/Layout/Nav.jsx";
   };
 })
 
+// This component wraps all other components within the app
 export default class Layout extends React.Component {
   componentWillMount() {
     this.props.dispatch(fetchCookies());

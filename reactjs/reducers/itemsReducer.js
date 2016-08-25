@@ -85,7 +85,6 @@ export default function reducer(state={
       }
     }
     case "DELETE_ITEM_FULFILLED": {
-      console.log('here: ', action.payload)
       return {
         ...state,
         items: state.items.filter(item => item.id !== action.payload),
