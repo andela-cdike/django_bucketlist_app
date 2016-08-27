@@ -2,7 +2,8 @@ import Radium from "radium";
 import React from "react";
 import { 
   Button, Col, ControlLabel, Form, FormGroup, 
-  FormControl, Modal, OverlayTrigger, Tooltip 
+  FormControl, Modal, Overlay, OverlayTrigger,
+  Popover, Tooltip 
 } from "react-bootstrap";
 import { findDOMNode } from "react-dom";
 
@@ -21,6 +22,7 @@ export default class EditButton extends React.Component {
     super(props);
     this.state = {
       showModal: false,
+      showNameInputSubmitError: false,
       name: '',
     };
   }
@@ -30,8 +32,25 @@ export default class EditButton extends React.Component {
     findDOMNode(this.refs.nameInput).focus();
   }
 
+  // show error message to user submits empty field
+  validateNameFieldFailed() {
+    if (this.state.name.length === 0) {
+      this.setState({ showNameInputSubmitError: true });  
+      setTimeout(() => {
+        this.setState({ showNameInputSubmitError: false });  
+      }, 2000)
+      return true
+    }
+    return false
+  }
+
   editItem() {
     const { dispatch, item, token, type } = this.props;
+
+    if (this.validateNameFieldFailed()) {
+      return;
+    }
+
     if (type === "Bucketlist") {
       dispatch(editBucketlist(token, item.id, this.state.name));
     } else if (type === "Item") {
@@ -60,18 +79,8 @@ export default class EditButton extends React.Component {
     // enter key should submit the form
     if (e.charCode == 13) {
       e.preventDefault();
-      if (this.state.name.length > 0) {
-        this.editItem();
-      }
+      this.editItem();
     }
-  }
-
-  getValidationState() {
-    // give usual cue as to whether current input is valid
-    // i.e. red when empty and green otherwise
-    const length = this.state.name.length;
-    if (length > 0) return 'success';
-    else if (length === 0) return 'error';
   }
 
   render() {
@@ -100,7 +109,7 @@ export default class EditButton extends React.Component {
           
           <Modal.Body>
             <Form horizontal>
-              <FormGroup controlId="Name" validationState={this.getValidationState()}>
+              <FormGroup controlId="Name">
                 <Col componentClass={ControlLabel} sm={1}>
                   Name
                 </Col>
@@ -113,6 +122,15 @@ export default class EditButton extends React.Component {
                     onChange={this.handleChange.bind(this)}
                     onKeyPress={this.handleKeyPress.bind(this)}
                   />
+                  <Overlay
+                    show={this.state.showNameInputSubmitError}
+                    target={() => findDOMNode(this.refs.nameInput)}
+                    placement="bottom"
+                  >
+                    <Popover id="popover-positioned-bottom" title="Input Error">
+                      This field cannot be empty
+                    </Popover>
+                  </Overlay>
                 </Col>
               </FormGroup>
             </Form>

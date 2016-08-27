@@ -83,7 +83,7 @@ footer p {
 .cb-slideshow li div { 
     z-index: 1000;
     position: absolute;
-    bottom: 30px;
+    bottom: 0px;
     left: 0px;
     width: 100%;
     text-align: center;
@@ -170,6 +170,11 @@ footer p {
 
 .no-cssanimations .cb-slideshow li span{
   opacity: 1;
+}
+
+.alert-info {
+  background-color: rgba(188, 232, 241, 0.5);
+  font-weight: 600;
 }
 
 ::-moz-selection { background: #42c5ea; color: #fff; text-shadow: none; }
@@ -286,6 +291,10 @@ footer p {
 .dropdown-menu > li > a:hover {
   color: #193A41;
   background-color: rgba(230,207,155, 0.3);
+}
+
+#add-button {
+  position: relative;
 }
 
 .modal-content {

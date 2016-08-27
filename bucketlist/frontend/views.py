@@ -127,9 +127,7 @@ class UserRegistrationView(View):
         username = request.POST.get('username')
         have_same_username = User.objects.filter(username__exact=username)
         if have_same_username:
-            args = {
-                'register_class': 'active'
-            }
+            args = {'register_class': 'active'}
             args.update(csrf(request))
             msg = ("Username is already taken. Please signup with another"
                    " username.")
@@ -151,11 +149,11 @@ class UserRegistrationView(View):
                 for error in user_form.errors[key]:
                     messages.add_message(request, messages.INFO, error)
 
-            args = {}
+            args = {'register_class': 'active'}
             args.update(csrf(request))
             args.update({'form': RegisterForm})
             return render(
-                request, 'authenticate.html', {'form': RegisterForm}
+                request, 'authenticate.html', args
             )
 
 

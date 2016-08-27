@@ -61,6 +61,7 @@ export default class Bucketlist extends React.Component {
     const { bucketlists, count, cookie, dispatch } = this.props;
     const limit = 5;
     const numOfPages = Math.ceil(count / limit);
+    console.log("count: ", count)
 
     const mappedBucketlists = bucketlists.map((bucketlist, i) => 
       <Well key={i} bsClass="well card rounded col-sm-5 col-xs-12 col-xs-offset-2">
@@ -99,7 +100,13 @@ export default class Bucketlist extends React.Component {
           </div>
         </div>
         <div class="row">
-          <AddButton dispatch={dispatch} token={cookie.user_token} type="Bucketlist"></AddButton>
+          <AddButton
+            dispatch={dispatch}
+            token={cookie.user_token}
+            type="Bucketlist"
+            count={count}
+          >
+          </AddButton>
         </div>
         <div class="row">
           <Packery>

@@ -111,6 +111,7 @@ export default class BucketlistItems extends React.Component {
             parent_id={bucketlist.id}
             token={cookie.user_token}
             type="Item"
+            count={count}
           >
           </AddButton>
         </div>
