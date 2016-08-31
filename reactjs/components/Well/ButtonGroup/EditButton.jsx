@@ -23,13 +23,17 @@ export default class EditButton extends React.Component {
     this.state = {
       showModal: false,
       showNameInputSubmitError: false,
-      name: '',
+      name: this.props.item.name,
     };
   }
 
   focusNameInput() {
     // focus on name input field when modal loads
-    findDOMNode(this.refs.nameInput).focus();
+    const element = findDOMNode(this.refs.nameInput);
+    const temp_value = element.value
+    element.focus();
+    element.value = ''
+    element.value = temp_value
   }
 
   // show error message to user submits empty field
@@ -87,9 +91,6 @@ export default class EditButton extends React.Component {
     const tooltip = (
       <Tooltip id="tooltip">Edit {this.props.type}</Tooltip>
     );
-    const placeholder = (
-      this.props.type === "Bucketlist" ? "Crazy list" : "Travel to the moon"
-    );
 
     return (
       <div style={[styles.envelope]}>
@@ -102,7 +103,8 @@ export default class EditButton extends React.Component {
         <Modal
           show={this.state.showModal}
           onHide={this.close.bind(this)}
-          onEnter={this.focusNameInput.bind(this)}>
+          onEnter={this.focusNameInput.bind(this)}
+        >
           <Modal.Header closeButton>
             <Modal.Title>Edit {this.props.type}</Modal.Title>
           </Modal.Header>
@@ -117,7 +119,6 @@ export default class EditButton extends React.Component {
                   <FormControl
                     value={this.state.name}
                     type="text" 
-                    placeholder={placeholder}
                     ref="nameInput"
                     onChange={this.handleChange.bind(this)}
                     onKeyPress={this.handleKeyPress.bind(this)}
