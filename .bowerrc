@@ -1,5 +1,5 @@
 {
-  "directory": "frontend/static/bower_components",
+  "directory": "bucketlist/frontend/static/frontend/static/bower_components",
   "analytics": false,
   "timeout": 120000,
   "interactive": false
