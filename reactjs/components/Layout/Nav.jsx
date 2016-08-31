@@ -52,9 +52,6 @@ export default class Navigation extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            <NavItem eventKey={1} href="#">
-              Bucketlists
-            </NavItem>
           </Nav>
           <Nav pullRight>
             <NavDropdown eventKey={2} 

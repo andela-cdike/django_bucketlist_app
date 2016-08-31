@@ -336,6 +336,16 @@ footer p {
   }
 }
 
+.breadcrumbs {
+  top: 92px;
+}
+
+@media (max-width: 768px) {
+  .breadcrumbs {
+    top: 0;
+  }
+}
+
 .search {
   top: 86px;
   right: -127px;

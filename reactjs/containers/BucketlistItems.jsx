@@ -101,8 +101,13 @@ export default class BucketlistItems extends React.Component {
     return (
       <div class="container">
         <div class="row">
-          <div class="col-sm-12">
+          <div class="col-sm-8">
             <h1 class="sub-heading">{bucketlist.name} Items</h1>
+          </div>
+          <div class="col-sm-4 breadcrumbs">
+            <h4>
+              <a href="#">Bucketlists</a> / {bucketlist.name}
+            </h4>
           </div>
         </div>
         <div class="row">
