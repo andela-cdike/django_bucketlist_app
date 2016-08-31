@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import moment from "moment";
 import React from "react";
-import { Pagination, Well } from "react-bootstrap";
+import { Button, Pagination, Well } from "react-bootstrap";
 import { Link } from "react-router";
 
 import { fetchBucketlists } from "../actions/bucketlistsActions";
@@ -61,7 +61,6 @@ export default class Bucketlist extends React.Component {
     const { bucketlists, count, cookie, dispatch } = this.props;
     const limit = 5;
     const numOfPages = Math.ceil(count / limit);
-    console.log("count: ", count)
 
     const mappedBucketlists = bucketlists.map((bucketlist, i) => 
       <Well key={i} bsClass="well card rounded col-sm-5 col-xs-12 col-xs-offset-2">
@@ -76,8 +75,11 @@ export default class Bucketlist extends React.Component {
 
         <Link to={"/bucketlist/" + bucketlist.id}>
           <div class="row">
-            <div class="col-xs-9">
+            <div class="col-xs-12">
               <h2>{bucketlist.name}</h2>
+              <Button bsStyle="primary" class="pull-right">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+              </Button>
             </div>
           </div>
           <p>

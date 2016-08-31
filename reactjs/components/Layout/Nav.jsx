@@ -51,13 +51,19 @@ export default class Navigation extends React.Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
+          <Nav>
+            <NavItem eventKey={1} href="#">
+              Bucketlists
+            </NavItem>
+          </Nav>
           <Nav pullRight>
-            <NavDropdown eventKey={1} 
+            <NavDropdown eventKey={2} 
               title={<i class="fa fa-sign-out" aria-hidden="true"></i>} 
-              id="basic-nav-dropdown">
-              <MenuItem eventKey={1.1} disabled>{this.props.user.username}</MenuItem>
+              id="basic-nav-dropdown"
+            >
+              <MenuItem eventKey={2.1} disabled>{this.props.user.username}</MenuItem>
               <MenuItem divider />
-              <MenuItem eventKey={1.2} href={window.location.origin + "/logout/"}>
+              <MenuItem eventKey={2.2} href={window.location.origin + "/logout/"}>
                 Log out
               </MenuItem>
             </NavDropdown>

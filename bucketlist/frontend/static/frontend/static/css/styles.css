@@ -366,6 +366,10 @@ footer p {
   background-color: #f9fad2;
 }
 
+.card h2 {
+  display: inline;
+}
+
 .card > a {
   color: #45818e;
 }

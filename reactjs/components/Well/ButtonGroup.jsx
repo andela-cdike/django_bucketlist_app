@@ -30,6 +30,7 @@ export default class ButtonGroup extends React.Component {
 
   render() {
     const { token, dispatch, item, type } = this.props;
+    
     return (
       <div style={[styles.btnGroup]}>
         <ButtonToolbar>
