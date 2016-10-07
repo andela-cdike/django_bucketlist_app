@@ -46,42 +46,52 @@ Others can be viewed in the requirements.txt and package.json files found in pro
 
 #### Follow these steps to Install:
 1. Clone this repository to the folder where you would like it installed on your machine.
-2. In the project root, add a `.env.yml` file to hold all your environment variables. The variables below must be given a value
-```cmd
+
+2. In the project root, add a `.env.yml` file to hold all your environment variables. The variables below must be given a value:
+    ```cmd
     SECRET_KEY:
     'very-very-very-secret-key'
     DATABASE_USER:
     'foo_user'
     DATABASE_PASSWORD:
     'youcannotguessme' 
-```
+    ```
+
 3. It is recommended that you create a virtual environment here before proceeding with installation: 
-`$ mkvirtualenv name_of_virtual_environment`
+    ```cmd
+    $ mkvirtualenv name_of_virtual_environment
+    ```
+
 4. Install all project's dependencies both backend and frontend by running the following commands in order (from project root):
-```cmd
+    ```cmd
     $ pip install -r requirements.txt
     $ npm install
     $ bower install
-```
+    ```
+
 5. To setup static files and database migrations, run (also in the project root):
-```cmd
-    $ bucketlist/python manage.py collectstatic
+    ```cmd
+    $ python bucketlist/manage.py collectstatic
     $ python bucketlist/manage.py makemigrations
     $ python bucketlist/manage.py migrate
-```
+    ```
 
 #### Run Project Locally
 After successfully installing project on your machine, run server with:
-```$ python bucketlist/manage.py runserver```
+```cmd
+$ python bucketlist/manage.py runserver
+```
 
 ## Tests
 To run tests:
-```$ python bucketlist/manage.py test --settings=bucketlist.settings.testing```
+```cmd
+$ python bucketlist/manage.py test --settings=bucketlist.settings.test
+```
 
 For coverage report:
 ```cmd
-    $ coverage run --source=api,frontend bucketlist/manage.py test bucketlist --noinput --settings=bucketlist.settings.testa
-    $ coverage report -m
+$ coverage run --source=api,frontend bucketlist/manage.py test bucketlist --noinput --settings=bucketlist.settings.test
+$ coverage report -m
 ```
 
 ## License
