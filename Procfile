@@ -1,0 +1,1 @@
+web: python bucketlist/manage.py bower install; python bucketlist/manage.py collectstatic --noinput --settings=bucketlist.settings.production --verbosity 0; gunicorn bucketlist.wsgi --pythonpath=bucketlist --timeout 15 --keep-alive 5 --log-level debug --log-file -

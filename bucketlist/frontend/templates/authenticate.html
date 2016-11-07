@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+        <!-- Background slideshow -->
+        <ul class="cb-slideshow">
+            <li>
+                <span>Image 01</span>
+                <div>
+                    <h3>See the world on a ballon</h3>
+                </div>
+            </li>
+            <li>
+                <span>Image 02</span>
+                <div>
+                    <h3>Go hiking in the woods</h3>
+                </div>
+            </li>
+            <li>
+                <span>Image 03</span>
+                <div>
+                    <h3>Jump down a mountain</h3>
+                </div>
+            </li>
+            <li>
+                <span>Image 04</span>
+                <div>
+                    <h3>Marry your sweet heart</h3>
+                </div>
+            </li>
+            <li>
+                <span>Image 05</span>
+                <div>
+                    <h3>Write a memoir</h3>
+                </div>
+            </li>
+            <li>
+                <span>Image 06</span>
+                <div>
+                    <h3>Xperience VR</h3>
+                </div>
+            </li>
+        </ul>
+
+        <!-- Top content -->
+        <div class="top-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2 text">
+                        <h1>Welcome to "Do the Bucket"</h1>
+                        <div class="description">
+                            <p>
+                                A simple application for managing lists of items you would 
+                                like to do before you kick the bucket. 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-sm-12 no-left">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        <span>
+                            <span class="close" data-dismiss="alert">&times;</span>
+                            {{ message|safe }}
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1 show-forms">
+                        <span class="show-login-form {{ login_class }}">Login</span>
+                        <span class="show-forms-divider">/</span> 
+                        <span class="show-register-form {{ register_class }}">Register</span> 
+                    </div>
+                </div>
+                
+                <div class="row login-form">
+                    <div class="col-sm-4 col-sm-offset-1">
+                        <form role="form" action="{% url 'login' %}" method="post" class="l-form">
+                            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                            <div class="form-group">
+                                <label class="sr-only" for="username">Username</label>
+                                <input type="text" name="username" placeholder="Username..." class="l-form-username form-control" id="l-form-username">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="password">Password</label>
+                                <input type="password" name="password" placeholder="Password..." class="l-form-password form-control" id="l-form-password">
+                            </div>
+                            <button type="submit" class="btn">Sign in!</button>
+                        </form>
+                    </div>
+                    {% include "snippet-right-icons.html" %}
+                </div>
+
+                <div class="row register-form">
+                    <div class="col-sm-4 col-sm-offset-1">
+                        <form role="form" action="{% url 'register' %}" method="post" class="r-form">
+                            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                            <div class="form-group">
+                                <label class="sr-only" for="username">Username</label>
+                                {{ form.username.errors }}
+                                <input type="text" name="username" placeholder="Username..." class="r-form-username form-control" id="r-form-username">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="email">Email</label>
+                                {{ form.email.errors }}
+                                <input type="text" name="email" placeholder="Email..." class="r-form-email form-control" id="r-form-email">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="password1">Password</label>
+                                {{ form.password1.errors }}
+                                <input type="password" name="password1" placeholder="Password..." class="r-form-password form-control" id="r-form-password">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="password2">Password</label>
+                                {{ form.password2.errors }}
+                                <input type="password" name="password2" placeholder="Password..." class="r-form-repassword form-control" id="r-form-repassword">
+                            </div>
+                            <button type="submit" class="btn">Sign me up!</button>
+                        </form>
+                    </div>
+                    {% include "snippet-right-icons.html" %}
+                </div>
+                    
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <div class="footer-border"></div>
+                        <p>
+                            Made with <i class="fa fa-heart icon" aria-hidden="true"></i>
+                            <a href="https://github.com/andela-cdike/" target="_blank">
+                                ElectroCorp
+                            </a>.
+                        </p>
+                    </div>
+                    
+                </div>
+            </div>
+        </footer>
+
+{% endblock main %}
+
+{% block extended_js %}
+    <script src="{%static 'frontend/static/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'frontend/static/js/scripts.js' %}"></script>
+{% endblock extended_js %}

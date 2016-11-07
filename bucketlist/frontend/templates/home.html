@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extended_css %}
+    <link rel="stylesheet" href="{% static 'frontend/static/css/body_bg.css' %}">
+{% endblock extended_css %}
+
+{% load render_bundle from webpack_loader %}
+{% block main %}
+<div id="App1">
+    
+</div>
+{% render_bundle 'vendors' %}
+{% render_bundle 'App1' %}
+{% endblock %}

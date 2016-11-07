@@ -1,0 +1,8 @@
+/****** Background image *******/
+html, body {
+  background-image: url("../img/notebook-paper-background.jpg");
+}
+
+footer {
+    bottom: -260px;
+}
